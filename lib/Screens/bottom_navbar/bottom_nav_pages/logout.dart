@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_3/Screens/auth/login_screen.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
+import 'package:project_3/Screens/splash_screen.dart';
 import 'package:project_3/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -15,9 +16,7 @@ class LogoutPage extends StatefulWidget {
 class _LogoutPageState extends State<LogoutPage> {
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.remove('email');
-    // await prefs.remove('password');
-    LoginScreen.isLoggedIn = false;
+    prefs.setBool(SplashScreenState.KEYLOGIN, false);
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => LoginScreen()),
         (Route<dynamic> route) => false);

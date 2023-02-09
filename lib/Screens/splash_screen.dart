@@ -12,29 +12,45 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends State<SplashScreen> {
 
-  Future<void> _checkLogin() async {
+  static const String KEYLOGIN = "login";
+
+  Future<void> whereToGo() async {
     final prefs = await SharedPreferences.getInstance();
-    final email = prefs.getString("email");
-    final password = prefs.getString("password");
 
-    if (email != null && password != null) {
-      // Navigate to the dashboard
-      LoginScreen.isLoggedIn = true;
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
-    }
+    var isLoggedIn =  prefs.getBool(KEYLOGIN);
+
+    // final email = prefs.getString("email");
+    // final password = prefs.getString("password");
+
+    Timer(Duration(seconds: 5), () async {
+      if(isLoggedIn!=null){
+        if(await isLoggedIn){
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+        }else{
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
+        }
+      }else{
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
+      }
+    });
+
+
+    // if (email != null && password != null) {
+    //   // Navigate to the dashboard
+    //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+    // }
 
   }
 
   @override
   void initState() {
-    Timer(Duration(seconds: 5), () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>LoginScreen())));
+    whereToGo();
     super.initState();
-    _checkLogin();
   }
 
   @override

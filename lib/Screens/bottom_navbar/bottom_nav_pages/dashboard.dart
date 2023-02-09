@@ -43,31 +43,31 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   //ApiSevices apiSevices = ApiSevices();
-  List items  = ApiSevices.fetchPostApi() as List;
-   bool isLoading = false;
-   bool hasMoreData = true;
-
-   void getData() async{
-     if(isLoading && hasMoreData){
-       isLoading = true;
-       setState(() {});
-
-       await Future.delayed(Duration(seconds: 1));
-
-       List dataList = items.length>100? []: List.generate(20, (index) => (index) => "Index : ${index + items.length}");
-
-       if(dataList.isEmpty){
-         hasMoreData = false;
-       }
-       items.addAll(dataList);
-
-       isLoading = false;
-       setState(() {
-
-       });
-     }
-
-   }
+  // List items  = ApiSevices.fetchPostApi() as List;
+  //  bool isLoading = false;
+  //  bool hasMoreData = true;
+  //
+  //  void getData() async{
+  //    if(isLoading && hasMoreData){
+  //      isLoading = true;
+  //      setState(() {});
+  //
+  //      await Future.delayed(Duration(seconds: 1));
+  //
+  //      List dataList = items.length>100? []: List.generate(20, (index) => (index) => "Index : ${index + items.length}");
+  //
+  //      if(dataList.isEmpty){
+  //        hasMoreData = false;
+  //      }
+  //      items.addAll(dataList);
+  //
+  //      isLoading = false;
+  //      setState(() {
+  //
+  //      });
+  //    }
+  //
+  //  }
 
   @override
   Widget build(BuildContext context) {

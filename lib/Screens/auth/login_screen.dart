@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:project_3/Screens/auth/signup_screen.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/dashboard.dart';
+import 'package:project_3/Screens/splash_screen.dart';
 import 'package:project_3/const/app_color.dart';
 import 'package:project_3/widgets/custom_button.dart';
 import 'package:project_3/widgets/custom_textfield.dart';
@@ -12,12 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
    LoginScreen({Key? key}) : super(key: key);
-  static bool isLoggedIn = false;
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -47,22 +48,50 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = prefs.getString("email");
     final password = prefs.getString("password");
 
-    if (email != null && password != null) {
-      // Navigate to the dashboard
-      LoginScreen.isLoggedIn = true;
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.deepPurpleAccent,
-          "Login", "Login Successfully");
-    }else{
-      Get.snackbar(
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.deepPurpleAccent,
-          "Login", "Login Failed");
+    // if(isLoggedIn!=null){
+    //   if(isLoggedIn){
+    //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+    //   }else{
+    //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
+    //   }
+    // }else{
+    //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
+    // }
+
+    prefs.setBool(SplashScreenState.KEYLOGIN, true);
+
+    if(email != null && password != null){
+      if(email == _emailController.text && password == _passwordController.text){
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+        Get.snackbar(
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.deepPurpleAccent,
+            "Login", "Login Successfully");
+      // }else{
+      //   Get.snackbar(
+      //       snackPosition: SnackPosition.BOTTOM,
+      //       backgroundColor: Colors.deepPurpleAccent,
+      //       "Signup", "Signup first then login");
+      }
     }
 
-  }
+
+
+  //   if (email != null && password != null) {
+  //     // Navigate to the dashboard
+  //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+  //     Get.snackbar(
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         backgroundColor: Colors.deepPurpleAccent,
+  //         "Login", "Login Successfully");
+  //   }else{
+  //     Get.snackbar(
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         backgroundColor: Colors.deepPurpleAccent,
+  //         "Signup", "Signup first then login");
+  // }
+    }
+
 
   Future<bool> showExitPopup() async {
     return await showDialog( //show confirm dialogue

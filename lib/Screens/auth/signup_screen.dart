@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:project_3/Screens/auth/login_screen.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
 import 'package:project_3/const/app_color.dart';
@@ -35,8 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       prefs.setString("email", email);
       prefs.setString("password", password);
       // Navigate to the dashboard
-      LoginScreen.isLoggedIn = true;
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavBar(),));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
     }
   }
   bool isObsecure = true;
@@ -224,6 +224,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     customButton("Sign Up", () {
                       signUp();
+                      Get.snackbar(
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.deepPurpleAccent,
+                          "Signup", "Signup Successfully");
                     }),
                     SizedBox(
                       height: 15.h,
