@@ -42,6 +42,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isObsecure = true;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: AppColor.kbgcolor,

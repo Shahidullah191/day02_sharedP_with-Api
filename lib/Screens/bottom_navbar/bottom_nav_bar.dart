@@ -39,6 +39,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: "Profile",
             icon: Icon(Icons.person),
             backgroundColor: Colors.purple,
+
           ),
           BottomNavigationBarItem(
             label: "Setting",

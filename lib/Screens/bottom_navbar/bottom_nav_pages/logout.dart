@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_3/Screens/auth/login_screen.dart';
+import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
 import 'package:project_3/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:get/get.dart';
 
 class LogoutPage extends StatefulWidget {
   const LogoutPage({Key? key}) : super(key: key);
@@ -12,26 +13,61 @@ class LogoutPage extends StatefulWidget {
 }
 
 class _LogoutPageState extends State<LogoutPage> {
-
-
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.remove('email');
     // await prefs.remove('password');
     LoginScreen.isLoggedIn = false;
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
-
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+        (Route<dynamic> route) => false);
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: customButton("Logout", (){
-          logout();
-        }),
-
+    return WillPopScope(
+      onWillPop: (() async => await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BottomNavBar(),
+          ))),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Logout"),
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+        ),
+        body: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 20),
+          child: Center(
+            child: customButton("Logout", () {
+              Get.defaultDialog(
+                title: "Logout",
+                titlePadding: EdgeInsets.only(top: 20),
+                contentPadding: EdgeInsets.all(20),
+                middleText: "Are you sure you want to logout the screen",
+                confirm: ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    onPressed: () {
+                      logout();
+                      Get.snackbar(
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.deepPurpleAccent,
+                          "Logout",
+                          "Logout Successfully");
+                    },
+                    child: Text("Ok")),
+                cancel: ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel")),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }

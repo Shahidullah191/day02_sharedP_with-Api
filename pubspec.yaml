@@ -41,6 +41,8 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.15
   url_launcher:
+  get:
+  infinite_scroll_pagination: ^3.2.0
 
 dev_dependencies:
   flutter_test:

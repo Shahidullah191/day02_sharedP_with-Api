@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:project_3/models/details_model.dart';
 import 'package:project_3/models/posts_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,4 +22,23 @@ class ApiSevices{
       return postsList;
     }
   }
+
+  static Future <DetailsModel> fetchPostApiUsingId({required var id}) async {
+    //var id ='';
+    DetailsModel postsDetailsList = DetailsModel();
+
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/$id'));
+
+    final data = jsonDecode(response.body.toString());
+
+    print(response.body);
+
+    if(response.statusCode == 200){
+        postsDetailsList=DetailsModel.fromJson(data);
+      return postsDetailsList;
+    }else{
+      return postsDetailsList;
+    }
+  }
+
 }
