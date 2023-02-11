@@ -58,21 +58,26 @@ class _LoginScreenState extends State<LoginScreen> {
     //   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
     // }
 
-    prefs.setBool(SplashScreenState.KEYLOGIN, true);
 
     if(email != null && password != null){
+
       if(email == _emailController.text && password == _passwordController.text){
+        prefs.setBool(SplashScreenState.KEYLOGIN, true);
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar(),));
-        Get.snackbar(
+    Get.snackbar(
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.deepPurpleAccent,
             "Login", "Login Successfully");
-      // }else{
-      //   Get.snackbar(
-      //       snackPosition: SnackPosition.BOTTOM,
-      //       backgroundColor: Colors.deepPurpleAccent,
-      //       "Signup", "Signup first then login");
       }
+
+      }
+    else{setState(() {
+      prefs.setBool(SplashScreenState.KEYLOGIN, false);
+      Get.snackbar(
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.deepPurpleAccent,
+          "Check", "You first time in the app then Signup otherwise you login");
+    });
     }
 
 
@@ -279,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              _checkLogin();
+                              //_checkLogin();
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignUpScreen(),));
 
                             },

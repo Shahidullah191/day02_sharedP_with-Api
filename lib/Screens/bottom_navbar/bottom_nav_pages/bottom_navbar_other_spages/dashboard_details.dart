@@ -39,7 +39,7 @@ class _DashboardDetailsState extends State<DashboardDetails> {
               ),
               Expanded(
                 child: FutureBuilder(
-                  future: ApiSevices.fetchPostApiUsingId(id: widget.id),
+                  future: ApiServices.fetchPostApiUsingId(id: widget.id),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return Center(

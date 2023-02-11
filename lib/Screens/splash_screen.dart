@@ -22,7 +22,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<void> whereToGo() async {
     final prefs = await SharedPreferences.getInstance();
 
-    var isLoggedIn =  prefs.getBool(KEYLOGIN);
+    var isLoggedIn =  await prefs.getBool(KEYLOGIN);
 
     // final email = prefs.getString("email");
     // final password = prefs.getString("password");

@@ -42,8 +42,8 @@ class _DashboardPageState extends State<DashboardPage> {
     )??false; //if showDialouge had returned null, then return false
   }
 
-  //ApiSevices apiSevices = ApiSevices();
-  // List items  = ApiSevices.fetchPostApi() as List;
+  //ApiServices apiServices = ApiServices();
+  // List items  = ApiServices.fetchPostApi() as List;
   //  bool isLoading = false;
   //  bool hasMoreData = true;
   //
@@ -83,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             Expanded(
               child: FutureBuilder(
-                future: ApiSevices.fetchPostApi(),
+                future: ApiServices.fetchPostApi(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Center(

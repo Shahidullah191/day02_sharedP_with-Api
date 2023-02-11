@@ -43,6 +43,8 @@ dependencies:
   url_launcher:
   get:
   infinite_scroll_pagination: ^3.2.0
+  image_picker:
+  connectivity_plus:
 
 dev_dependencies:
   flutter_test:
