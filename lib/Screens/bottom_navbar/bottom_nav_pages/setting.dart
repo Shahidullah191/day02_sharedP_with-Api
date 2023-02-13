@@ -169,7 +169,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   void dispose() {
     _controller.removeListener(_loadMore); //for pagination.................
-    _networkConnectivity.disposeStream();
+    // _networkConnectivity.disposeStream();
     super.dispose();
   }
 
