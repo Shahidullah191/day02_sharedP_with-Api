@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import '../../../internet_connectivity/internet_connectivity.dart';
+import '../../../main.dart';
 import '../bottom_nav_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -45,16 +47,7 @@ class _SettingPageState extends State<SettingPage> {
           string = 'No Internet';
           _source.values.toList()[0] = false;
       }
-      // 2.
-      // 3.
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       string,
-      //       style: TextStyle(fontSize: 30),
-      //     ),
-      //   ),
-      // );
+
       _source.values.toList()[0] == false
           ? setState(() {
               Get.defaultDialog(
@@ -173,6 +166,7 @@ class _SettingPageState extends State<SettingPage> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -186,6 +180,11 @@ class _SettingPageState extends State<SettingPage> {
           title: Text("Setting"),
           centerTitle: true,
           backgroundColor: Colors.purple,
+          actions: [
+            IconButton(onPressed: () {
+
+            }, icon: const Icon(Icons.notification_add)),
+          ],
         ),
         body: _isFirstLoadRunning
             ? const Center(
