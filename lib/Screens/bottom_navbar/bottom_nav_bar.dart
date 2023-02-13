@@ -8,6 +8,8 @@ import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/setting.dart';
 import 'package:project_3/const/app_color.dart';
 import 'package:project_3/widgets/custom_textstyle.dart';
 
+import 'bottom_nav_pages/image.dart';
+
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
@@ -16,7 +18,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final pages = [DashboardPage(), ProfilePage(), SettingPage(), LogoutPage()];
+  final pages = [DashboardPage(), ProfilePage(), SettingPage(), ImagePage(), LogoutPage(),];
   int _currentIndex = 0;
 
   @override
@@ -46,6 +48,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: Icon(Icons.settings),
             backgroundColor: Colors.purple,
           ),
+
+          BottomNavigationBarItem(
+            label: "Image",
+            icon: Icon(Icons.image),
+            backgroundColor: Colors.purple,
+          ),
+
           BottomNavigationBarItem(
             label: "Logout",
             icon: Icon(Icons.logout),

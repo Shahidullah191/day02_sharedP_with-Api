@@ -8,6 +8,8 @@ import 'package:project_3/widgets/custom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
+import 'bottom_navbar_other_spages/set_photo_screen.dart';
+
 class LogoutPage extends StatefulWidget {
   const LogoutPage({Key? key}) : super(key: key);
 
@@ -72,7 +74,7 @@ class _LogoutPageState extends State<LogoutPage> {
 
               SizedBox(height: 20.h,),
               customButton("Image Picker", (){
-                Get.to(ImagePickerExample());
+                Get.to(SetPhotoScreen());
               })
 
 
