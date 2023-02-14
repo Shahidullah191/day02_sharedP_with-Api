@@ -35,8 +35,9 @@ class _SettingPageState extends State<SettingPage> {
       // 1.
       switch (_source.keys.toList()[0]) {
         case ConnectivityResult.mobile:
-          string =
-              _source.values.toList()[0] ? 'Mobile: Online' : 'Mobile: No Internet';
+          string = _source.values.toList()[0]
+              ? 'Mobile: Online'
+              : 'Mobile: No Internet';
           break;
         case ConnectivityResult.wifi:
           string =
@@ -54,7 +55,8 @@ class _SettingPageState extends State<SettingPage> {
                 title: string,
                 titlePadding: EdgeInsets.only(top: 20),
                 contentPadding: EdgeInsets.all(20),
-                middleText: "Your internet connection is lost, please check the internet connection",
+                middleText:
+                    "Your internet connection is lost, please check the internet connection",
                 confirm: ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
@@ -166,7 +168,6 @@ class _SettingPageState extends State<SettingPage> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -180,11 +181,6 @@ class _SettingPageState extends State<SettingPage> {
           title: Text("Setting"),
           centerTitle: true,
           backgroundColor: Colors.purple,
-          actions: [
-            IconButton(onPressed: () {
-
-            }, icon: const Icon(Icons.notification_add)),
-          ],
         ),
         body: _isFirstLoadRunning
             ? const Center(

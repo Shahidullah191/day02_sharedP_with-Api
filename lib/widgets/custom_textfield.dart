@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_3/widgets/custom_textstyle.dart';
@@ -19,7 +20,7 @@ class CustomTextField extends StatelessWidget {
         this.labelText,
         this.icon,
         this.sufixicon,
-        this.validator
+        this.validator,
       })
       : super(key: key);
 
@@ -31,10 +32,12 @@ class CustomTextField extends StatelessWidget {
   final IconData? sufixicon;
   final FormFieldValidator? validator;
 
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
+      //onFieldSubmitted: (value) => FocusScope.of(context).nextFocus(),
       controller: Controller,
       keyboardType: keyBoardType,
       decoration: InputDecoration(

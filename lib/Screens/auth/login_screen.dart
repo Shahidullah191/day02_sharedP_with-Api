@@ -208,11 +208,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyBoardType: TextInputType.emailAddress,
                         icon: Icons.email_outlined,
                         labelText: "Email",
+
                       ),
                       SizedBox(
                         height: 15.h,
                       ),
                       TextFormField(
+                        onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Enter a valid password!';

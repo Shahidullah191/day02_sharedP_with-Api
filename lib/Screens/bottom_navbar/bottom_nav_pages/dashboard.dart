@@ -1,7 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/bottom_navbar_other_spages/dashboard_details.dart';
 import 'package:project_3/api_services/api_sevices.dart';
 import 'package:project_3/models/posts_model.dart';
+
+import '../../../main.dart';
+import '../../../notification/local_notification_service.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({Key? key}) : super(key: key);
@@ -38,6 +43,9 @@ class _DashboardPageState extends State<DashboardPage> {
         false; //if showDialouge had returned null, then return false
   }
 
+  //.........................................
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -47,6 +55,11 @@ class _DashboardPageState extends State<DashboardPage> {
           backgroundColor: Colors.purple,
           title: Text("Dashboard"),
           centerTitle: true,
+          actions: [
+            IconButton(onPressed: () {
+              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationServices(),));
+            }, icon: Icon(Icons.notification_add)),
+          ],
         ),
         body: Column(
           children: [

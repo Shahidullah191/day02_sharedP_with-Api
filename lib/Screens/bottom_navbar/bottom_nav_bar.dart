@@ -10,7 +10,6 @@ import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/setting.dart';
 import 'package:project_3/const/app_color.dart';
 import 'package:project_3/widgets/custom_textstyle.dart';
 
-import '../../main.dart';
 import 'bottom_nav_pages/image.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -58,6 +57,8 @@ class BottomNavBar extends StatefulWidget {
 
 
     }
+
+
 
 
   final pages = [DashboardPage(), ProfilePage(), SettingPage(), ImagePage(), LogoutPage(),];

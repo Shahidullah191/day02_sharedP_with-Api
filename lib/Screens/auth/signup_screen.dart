@@ -123,6 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 15.h,
                     ),
                     TextFormField(
+                      //onFieldSubmitted: (value) => FocusScope.of(context).nextFocus(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter a valid password!';
@@ -173,6 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 15.h,
                     ),
                     TextFormField(
+                      onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
                       validator: (value) {
                         if (value != _passwordController.text) {
                           return "The passwords do not match.";
