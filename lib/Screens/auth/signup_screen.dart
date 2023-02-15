@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:project_3/Screens/auth/login_screen.dart';
-import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
 import 'package:project_3/const/app_color.dart';
 import 'package:project_3/widgets/custom_button.dart';
 import 'package:project_3/widgets/custom_textfield.dart';
@@ -34,9 +33,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // Save the user's email and password
       final prefs = await SharedPreferences.getInstance();
       prefs.setString("email", email);
-      prefs.setString("password", password);
+      prefs.setString("password", password).then((value) =>
+          Get.snackbar(
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.deepPurpleAccent,
+          "Signup", "Signup Successfully"));
       // Navigate to the dashboard
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
+
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen(),));
+
+
+
+
     }
   }
   bool isObsecure = true;
@@ -174,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 15.h,
                     ),
                     TextFormField(
-                      onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
+                      //onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
                       validator: (value) {
                         if (value != _passwordController.text) {
                           return "The passwords do not match.";
@@ -226,10 +234,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     customButton("Sign Up", () {
                       signUp();
-                      Get.snackbar(
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.deepPurpleAccent,
-                          "Signup", "Signup Successfully");
                     }),
                     SizedBox(
                       height: 15.h,
@@ -246,7 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
                               builder: (context) => LoginScreen(),
                             ));
                           },

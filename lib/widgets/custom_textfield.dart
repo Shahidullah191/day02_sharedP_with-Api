@@ -3,14 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_3/widgets/custom_textstyle.dart';
 
-// Widget myTextField(String hintText,keyBoardType,controller){
-//   return TextField(
-//     keyboardType: keyBoardType,
-//     controller: controller,
-//     decoration: InputDecoration(hintText: hintText),
-//   );
-// }
-
 
 class CustomTextField extends StatelessWidget {
   CustomTextField(
