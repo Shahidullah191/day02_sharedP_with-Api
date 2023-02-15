@@ -177,21 +177,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          width: 3.w,
+                          width: 1.w,
                           color: AppColor.kbgcolor,
                         ),
                         borderRadius: BorderRadius.circular(50.0.r),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          width: 3.w,
+                          width: 1.w,
                           color: AppColor.kbgcolor,
                         ),
                         borderRadius: BorderRadius.circular(50.0.r),
                       ),
                       labelText: "Password",
                       labelStyle:
-                          myStyle(20.sp, AppColor.kbgcolor, FontWeight.bold),
+                          myStyle(16.sp, AppColor.kbgcolor, FontWeight.bold),
                       prefixIcon: Icon(
                         Icons.lock_outlined,
                         color: AppColor.kbgcolor,

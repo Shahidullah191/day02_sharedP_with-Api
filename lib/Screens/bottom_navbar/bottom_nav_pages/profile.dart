@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_bar.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'bottom_navbar_other_spages/stepper_form.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -38,6 +40,11 @@ class _ProfilePageState extends State<ProfilePage> {
           backgroundColor: Colors.purple,
           title: Text("User Profile"),
           centerTitle: true,
+          actions: [
+            IconButton(onPressed: () {
+              Get.to(StepperFormScreen());
+            }, icon: Icon(Icons.person_add_alt_1)),
+          ],
         ),
         //backgroundColor: Colors.purpleAccent,
         body: SafeArea(

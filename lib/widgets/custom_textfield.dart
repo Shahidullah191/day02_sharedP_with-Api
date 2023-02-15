@@ -13,6 +13,9 @@ class CustomTextField extends StatelessWidget {
         this.icon,
         this.sufixicon,
         this.validator,
+        this.textInputAction,
+        this.onsaved,
+        this.onChange,
       })
       : super(key: key);
 
@@ -23,29 +26,37 @@ class CustomTextField extends StatelessWidget {
   final IconData? icon;
   final IconData? sufixicon;
   final FormFieldValidator? validator;
+  final TextInputAction ? textInputAction;
+  final FormFieldSetter? onsaved;
+  final FormFieldSetter? onChange;
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
+      textInputAction: textInputAction,
       validator: validator,
       //onFieldSubmitted: (value) => FocusScope.of(context).nextFocus(),
       controller: Controller,
       keyboardType: keyBoardType,
       decoration: InputDecoration(
+
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 3.w, color: Color(0xff7B81EC)),
+          borderSide: BorderSide(width: 1.w, color: Color(0xff7B81EC)),
           borderRadius: BorderRadius.circular(50.0.r),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 3.w, color: Color(0xff7B81EC)),
+          borderSide: BorderSide(width: 1.w, color: Color(0xff7B81EC)),
           borderRadius: BorderRadius.circular(50.0.r),
         ),
         labelText: labelText,
-        labelStyle: myStyle(20.sp, Color(0xff7B81EC), FontWeight.bold),
+        labelStyle: myStyle(16.sp, Color(0xff7B81EC), FontWeight.bold),
         prefixIcon: Icon(icon, color: Color(0xff7B81EC),),
         suffixIcon: Icon(sufixicon, color: Color(0xff7B81EC),),
       ),
+      onSaved: onsaved,
+      onChanged: onChange,
     );
   }
 }
