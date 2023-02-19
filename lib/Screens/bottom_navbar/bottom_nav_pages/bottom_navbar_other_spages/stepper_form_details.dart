@@ -10,6 +10,7 @@ class StepperFormDetails extends StatefulWidget {
     required this.address,
     required this.professionalQualifications,
     required this.academicQualifications,
+    required this.academicCGPA,
     required this.lastInstituteName,
   }) : super(key: key);
   String name;
@@ -17,9 +18,10 @@ class StepperFormDetails extends StatefulWidget {
   String mobileNumber;
   String gender;
   String address;
-  String academicQualifications;
+  List<String> academicQualifications;
+  List<TextEditingController> academicCGPA;
   String lastInstituteName;
-  String professionalQualifications;
+  List<String> professionalQualifications;
 
   @override
   State<StepperFormDetails> createState() => _StepperFormDetailsState();
@@ -101,19 +103,39 @@ class _StepperFormDetailsState extends State<StepperFormDetails> {
               ),
             ),
 
+           Card(
+             margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Padding(
+                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal:15.0),
+                   child: Text("Academic Qualification:", style: TextStyle(
+                       fontFamily: 'SourceSansPro',
+                       fontSize: 18,
+                       color: Colors.teal.shade900),),
+                 ),
+                 ListView.builder(
+                   shrinkWrap: true,
+                   physics: NeverScrollableScrollPhysics(),
+                   itemCount: widget.academicQualifications.length,
+                     itemBuilder: (context, index) {
+                       return ListTile(
+                         title: Text(
+                            widget.academicQualifications[index] + ' : CGPA-' + widget.academicCGPA[index].text,
+                           style: TextStyle(
+                               fontFamily: 'SourceSansPro',
+                               fontSize: 18,
+                               color: Colors.teal.shade900),
+                         ),
+                       );
+                     },
+                 ),
 
-            Card(
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: ListTile(
-                title: Text(
-                  'Academic Qualifications: ${widget.academicQualifications}',
-                  style: TextStyle(
-                      fontFamily: 'SourceSansPro',
-                      fontSize: 18,
-                      color: Colors.teal.shade900),
-                ),
-              ),
-            ),
+
+               ],
+             ),
+           ),
 
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
@@ -130,16 +152,38 @@ class _StepperFormDetailsState extends State<StepperFormDetails> {
 
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: ListTile(
-                title: Text(
-                  'Professional Qualifications: ${widget.professionalQualifications}',
-                  style: TextStyle(
-                      fontFamily: 'SourceSansPro',
-                      fontSize: 18,
-                      color: Colors.teal.shade900),
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal:15.0),
+                    child: Text("Professional Qualifications:", style: TextStyle(
+                        fontFamily: 'SourceSansPro',
+                        fontSize: 18,
+                        color: Colors.teal.shade900),),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: widget.professionalQualifications.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          widget.professionalQualifications[index],
+                          style: TextStyle(
+                              fontFamily: 'SourceSansPro',
+                              fontSize: 18,
+                              color: Colors.teal.shade900),
+                        ),
+                      );
+                    },
+                  ),
+
+
+                ],
               ),
             ),
+
           ],
         ),
       ),

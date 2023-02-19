@@ -7,7 +7,7 @@ import 'package:project_3/widgets/custom_textstyle.dart';
 import '../../../../widgets/custom_textfield.dart';
 
 class StepperFormScreen extends StatefulWidget {
-  const StepperFormScreen({Key? key}) : super(key: key);
+  StepperFormScreen({Key? key}) : super(key: key);
 
   @override
   State<StepperFormScreen> createState() => _StepperFormScreenState();
@@ -25,7 +25,6 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
 
   String? genderValue;
 
-  // list of checkboxes for academic qualifications
   List<String> academicQualifications = [
     'SSC',
     'HSC',
@@ -34,6 +33,8 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
     'PhD',
   ];
   List<bool> academicQualificationsValues = List.filled(5, false);
+  List<TextEditingController> cgpaControllers =
+      List.generate(5, (index) => TextEditingController());
 
   // list of professional qualifications
   List<Map<String, String>> professionalQualifications = [];
@@ -98,7 +99,10 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                     title: Text("1"),
                     content: Column(
                       children: [
-                        Text("Personal Information", style: myStyle(18.sp, Colors.black, FontWeight.bold),),
+                        Text(
+                          "Personal Information",
+                          style: myStyle(18.sp, Colors.black, FontWeight.bold),
+                        ),
                         SizedBox(
                           height: 15.h,
                         ),
@@ -160,8 +164,9 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                       ],
                     ),
                     isActive: currentStep == 0,
-                    state:
-                        currentStep == 0 ? StepState.editing : StepState.indexed,
+                    state: currentStep == 0
+                        ? StepState.editing
+                        : StepState.indexed,
                   ),
 
                   //Second form
@@ -169,8 +174,13 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                     title: Text("2"),
                     content: Column(
                       children: [
-                        Text("Personal Details", style: myStyle(18.sp, Colors.black, FontWeight.bold),),
-                        SizedBox(height: 10.h,),
+                        Text(
+                          "Personal Details",
+                          style: myStyle(18.sp, Colors.black, FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Row(
                           children: [
                             Radio(
@@ -221,8 +231,9 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                       ],
                     ),
                     isActive: currentStep == 1,
-                    state:
-                        currentStep == 1 ? StepState.editing : StepState.indexed,
+                    state: currentStep == 1
+                        ? StepState.editing
+                        : StepState.indexed,
                   ),
 
                   //Third form..
@@ -230,23 +241,51 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                     title: Text("3"),
                     content: Column(
                       children: [
-                        Text("Academic Qualification", style: myStyle(18.sp, Colors.black, FontWeight.bold),),
-                        SizedBox(height: 10.h,),
+                        Text(
+                          "Academic Qualification",
+                          style: myStyle(18.sp, Colors.black, FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         ListView.builder(
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: academicQualifications.length,
-                          itemBuilder: (context, index) {
-                            return CheckboxListTile(
-                              title: Text(academicQualifications[index]),
-                              value: academicQualificationsValues[index],
-                              onChanged: (value) {
-                                setState(() {
-                                  academicQualificationsValues[index] = value!;
-                                });
-                              },
+                          itemBuilder: (BuildContext context, int index) {
+                            return Wrap(
+                              children: [
+                                SizedBox(
+                                  width: Get.width * .4,
+                                  child: CheckboxListTile(
+                                    title: Text(academicQualifications[index]),
+                                    value: academicQualificationsValues[index],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        academicQualificationsValues[index] =
+                                            value!;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                if (academicQualificationsValues[index])
+                                  SizedBox(
+                                    width: Get.width * .4,
+                                    child: TextField(
+                                      controller: cgpaControllers[index],
+                                      decoration: InputDecoration(
+                                        labelText:
+                                            academicQualifications[index],
+                                        hintText: 'Enter your CGPA',
+                                      ),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                              ],
                             );
                           },
                         ),
+                        SizedBox(height: 15.h),
                         CustomTextField(
                           Controller: instituteNameController,
                           keyBoardType: TextInputType.text,
@@ -263,8 +302,9 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                       ],
                     ),
                     isActive: currentStep == 2,
-                    state:
-                        currentStep == 2 ? StepState.editing : StepState.indexed,
+                    state: currentStep == 2
+                        ? StepState.editing
+                        : StepState.indexed,
                   ),
 
                   //Fourth Form
@@ -272,7 +312,10 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                     title: Text("4"),
                     content: Column(
                       children: [
-                        Text("Professional Qualification", style: myStyle(18.sp, Colors.black, FontWeight.bold),),
+                        Text(
+                          "Professional Qualification",
+                          style: myStyle(18.sp, Colors.black, FontWeight.bold),
+                        ),
                         SizedBox(
                           height: 10.h,
                         ),
@@ -336,55 +379,73 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
                             );
                           },
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              professionalQualifications.add({});
-                            });
-                          },
-                          child: Text("Add Professional Qualification"),
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  professionalQualifications.add({});
+                                });
+                              },
+                              child: Text("Add"),
+                            ),
+
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  professionalQualifications.removeLast();
+                                });
+                              },
+                              child: Text("Remove"),
+                            ),
+                          ],
+                        )
+
                       ],
                     ),
                     isActive: currentStep == 3,
-                    state:
-                        currentStep == 3 ? StepState.editing : StepState.indexed,
+                    state: currentStep == 3
+                        ? StepState.editing
+                        : StepState.indexed,
                   ),
                 ],
               ),
             ),
             if (complete)
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(StepperFormDetails(
-                      name: nameController.text,
-                      email: emailController.text,
-                      mobileNumber: mobileNumberController.text,
-                      gender: genderValue.toString(),
-                      address: addressController.text,
-                      professionalQualifications:
-                          getProfessionalQualifications(),
-                      academicQualifications: getAcademicQualifications(),
-                      lastInstituteName: instituteNameController.text));
-                },
-                child: Text("Submit")),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.to(StepperFormDetails(
+                        name: nameController.text,
+                        email: emailController.text,
+                        mobileNumber: mobileNumberController.text,
+                        gender: genderValue.toString(),
+                        address: addressController.text,
+                        professionalQualifications:
+                            getProfessionalQualifications(),
+                        academicQualifications: getAcademicQualifications(),
+                        academicCGPA: cgpaControllers,
+                        lastInstituteName: instituteNameController.text));
+                  },
+                  child: Text("Submit")),
           ],
         ),
       ),
     );
   }
 
-  String getAcademicQualifications() {
+  List <String> getAcademicQualifications() {
     List<String> selectedQualifications = [];
     for (int i = 0; i < academicQualificationsValues.length; i++) {
       if (academicQualificationsValues[i]) {
         selectedQualifications.add(academicQualifications[i]);
       }
     }
-    return selectedQualifications.join(', ');
+    return selectedQualifications;
   }
 
-  String getProfessionalQualifications() {
+
+  List <String> getProfessionalQualifications() {
     List<String> qualificationStrings = [];
     for (int i = 0; i < professionalQualifications.length; i++) {
       if (professionalQualifications[i]['instituteName'] != null &&
@@ -393,6 +454,6 @@ class _StepperFormScreenState extends State<StepperFormScreen> {
             '${professionalQualifications[i]['instituteName']}, ${professionalQualifications[i]['yearOfExperience']} years');
       }
     }
-    return qualificationStrings.join('\n');
+    return qualificationStrings;
   }
 }
