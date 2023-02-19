@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../internet_connectivity/internet_connectivity.dart';
 import '../../../main.dart';
@@ -181,6 +182,42 @@ class _SettingPageState extends State<SettingPage> {
           title: Text("Setting"),
           centerTitle: true,
           backgroundColor: Colors.purple,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.bottomSheet(Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 15.h,),
+                        ListTile(
+                          leading: Icon(Icons.light_mode),
+                          title: Text("Light Theme",),
+                          onTap: () {
+                            Get.changeThemeMode(ThemeMode.light);
+                          },
+                        ),
+                        Divider(
+                          thickness: 3,
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.dark_mode),
+                          title: Text("Dark Theme"),
+                          onTap: () {
+                            Get.changeThemeMode(ThemeMode.dark);
+                          },
+                        ),
+                      ],
+                    ),
+                  ));
+                },
+                icon: Icon(Icons.dark_mode)),
+          ],
         ),
         body: _isFirstLoadRunning
             ? const Center(

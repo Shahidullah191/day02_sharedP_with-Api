@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
           centerTitle: true,
           actions: [
             IconButton(onPressed: () {
-              Get.to(StepperFormScreen());
+              Get.to(()=>StepperFormScreen());
             }, icon: Icon(Icons.person_add_alt_1)),
           ],
         ),

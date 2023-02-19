@@ -7,6 +7,7 @@ import 'package:project_3/models/posts_model.dart';
 
 import '../../../main.dart';
 import '../../../notification/local_notification_service.dart';
+import 'bottom_navbar_other_spages/card_swiper_example.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({Key? key}) : super(key: key);
@@ -57,8 +58,8 @@ class _DashboardPageState extends State<DashboardPage> {
           centerTitle: true,
           actions: [
             IconButton(onPressed: () {
-              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationServices(),));
-            }, icon: Icon(Icons.notification_add)),
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardSwiperExample(),));
+            }, icon: Icon(Icons.contact_page_sharp)),
           ],
         ),
         body: Column(
