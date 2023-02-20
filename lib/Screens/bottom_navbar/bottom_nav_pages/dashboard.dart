@@ -1,12 +1,7 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:project_3/Screens/bottom_navbar/bottom_nav_pages/bottom_navbar_other_spages/dashboard_details.dart';
 import 'package:project_3/api_services/api_sevices.dart';
-import 'package:project_3/models/posts_model.dart';
 
-import '../../../main.dart';
-import '../../../notification/local_notification_service.dart';
 import 'bottom_navbar_other_spages/card_swiper_example.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -46,7 +41,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   //.........................................
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -57,9 +51,13 @@ class _DashboardPageState extends State<DashboardPage> {
           title: Text("Dashboard"),
           centerTitle: true,
           actions: [
-            IconButton(onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardSwiperExample(),));
-            }, icon: Icon(Icons.contact_page_sharp)),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CardSwiperExample(),
+                  ));
+                },
+                icon: Icon(Icons.contact_page_sharp)),
           ],
         ),
         body: Column(
